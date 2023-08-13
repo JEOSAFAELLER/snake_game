@@ -54,8 +54,10 @@ function Game():JSX.Element {
                 break;
 
         }
+        //#if eats food then grow 
+        
 
-        setSnake([newHead, ...snake]);
+        setSnake([newHead, ...snake.slice(0,-1)]);
     }    
 
  const handleGesture = (event:GestureEventType) => {
