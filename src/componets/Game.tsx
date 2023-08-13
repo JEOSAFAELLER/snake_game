@@ -4,7 +4,8 @@ import { Colors } from "./styles/colors"
 
 function Game():JSX.Element {
   return (
-    <SafeAreaView>
+    <SafeAreaView
+    style={style.container}>
         
 
 
@@ -17,7 +18,7 @@ export default Game
 const style = StyleSheet.create({
     container:{
         flex:1, 
-        backgroundColor:Colors.background,
+        backgroundColor:Colors.primary,
         alignItems:'center',
         justifyContent:'center'
     }
