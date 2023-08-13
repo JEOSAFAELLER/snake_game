@@ -1,15 +1,21 @@
 import * as React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { Colors } from "./styles/colors"
+import { PanGestureHandler } from 'react-native-gesture-handler';
 
 function Game():JSX.Element {
-  return (
-    <SafeAreaView
-    style={style.container}>
-        
+ const handleGesture = (event:any) => {
+    console.log(event);
+ };
+ 
+ 
+    return (
 
+    <PanGestureHandler onGestureEvent={handleGesture}>
+        <SafeAreaView  style={style.container}></SafeAreaView>
 
-    </SafeAreaView>
+    </PanGestureHandler>
+    
   )
 }
 
