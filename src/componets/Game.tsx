@@ -4,11 +4,14 @@ import { Colors } from "./styles/colors"
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { Coordinate, Direction, GestureEventType } from './types/types';
 import Snake from './Snake';
+
+import Food from './Food';
 import { checkGameOver } from './utils/CheckGameOver';
+import { checkEatsfood } from './utils/checksEatsFood';
 
 const SNAKE_INITIAL_POSITION = [{ x: 5, y:5 }];
 const FOOD_INITIAL_POSITION = { x: 5, y: 20 };
-const GAME_BOUNDS = { minX: 0, maxX: 40, minY: 0, maxY: 71 };
+const GAME_BOUNDS = { minX: 0, maxX: 30, minY: 0, maxY: 60 };
 const MOVE_INTERVAL = 50;
 const SCORE_INCREMENT = 10;
 
@@ -60,9 +63,11 @@ function Game():JSX.Element {
 
         }
         //#if eats food then grow 
+        if (checkEatsfood(newHead, food, 2)) {
+            setSnake([newHead, ...snake.slice(0,-1)])
 
-
-        setSnake([newHead, ...snake.slice(0,-1)]);
+        }
+            setSnake([newHead, ...snake.slice(0,-1)]);
     }    
 
  const handleGesture = (event:GestureEventType) => {
@@ -98,7 +103,7 @@ function Game():JSX.Element {
         <SafeAreaView  style={style.container}>
             <View style={style.boundaries}>
                 <Snake snake={snake}/>
-                
+                <Food x={food.x} y={food.y}/>
             </View>
         </SafeAreaView>
 
