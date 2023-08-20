@@ -4,10 +4,11 @@ import { Colors } from "./styles/colors"
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { Coordinate, Direction, GestureEventType } from './types/types';
 import Snake from './Snake';
+import { checkGameOver } from './utils/CheckGameOver';
 
 const SNAKE_INITIAL_POSITION = [{ x: 5, y:5 }];
 const FOOD_INITIAL_POSITION = { x: 5, y: 20 };
-const GAME_BOUNDS = { minX: 0, maxX: 35, minY: 0, maxY: 63 };
+const GAME_BOUNDS = { minX: 0, maxX: 40, minY: 0, maxY: 71 };
 const MOVE_INTERVAL = 50;
 const SCORE_INCREMENT = 10;
 
@@ -35,7 +36,11 @@ function Game():JSX.Element {
         const snakeHead = snake[0];
         const newHead = { ...snakeHead}//creating a copy
 
-        //game over
+        //#game over
+        if(checkGameOver(snakeHead, GAME_BOUNDS)){
+            setIsGameOver((prev) => !prev);
+            return;
+        }
 
         switch (direction){
             case Direction.Up:
@@ -55,7 +60,7 @@ function Game():JSX.Element {
 
         }
         //#if eats food then grow 
-        
+
 
         setSnake([newHead, ...snake.slice(0,-1)]);
     }    
@@ -93,6 +98,7 @@ function Game():JSX.Element {
         <SafeAreaView  style={style.container}>
             <View style={style.boundaries}>
                 <Snake snake={snake}/>
+                
             </View>
         </SafeAreaView>
 
